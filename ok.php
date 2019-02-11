@@ -1,4 +1,4 @@
 <?
-
+//test
 print "ok";
 ?>
