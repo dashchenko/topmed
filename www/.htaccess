@@ -1,0 +1,18 @@
+AddDefaultCharset UTF-8
+
+Options -Indexes
+
+
+
+RewriteEngine on
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+RewriteRule ^([0-9]{3})(.*)\.html$ ?page=$1&var=$2 [L]
+
+
+ErrorDocument 404 /404.html
+ErrorDocument 403 /404.html
+ErrorDocument 400 /404.html
+ErrorDocument 500 /404.html
