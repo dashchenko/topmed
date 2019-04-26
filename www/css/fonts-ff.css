@@ -1,0 +1,15 @@
+@font-face
+{
+	font-family:'Graphik';
+	font-style:normal;
+	font-weight:normal;
+	src:url(/assets/Graphik-Regular-Web-745b5a1b9df5f3fab01fc511d3b38b365d2a50f9e6f6a8268f6f994d5ed91d44.woff2) format("woff2"),url(/assets/Graphik-Regular-Web-36a20ba0e775b202ea4c516e93a90b390a3ae495d69b0854e66d744f601327c5.woff) format("woff");
+	font-display:swap
+}
+@font-face{
+	font-family:'Graphik';
+	font-style:normal;
+	font-weight:bold;
+	src:url(/assets/Graphik-Semibold-Web-94f71b1d8d70318897dcafaac7721e47298d1e0fa1acaa0bf06cfc01d7cf4579.woff2) format("woff2"),url(/assets/Graphik-Semibold-Web-2a4a4967ec03524c1b70baec30232c0b9f4e4e8f64f1a3076fdaef1a9d53eed3.woff) format("woff");font-display:swap}@font-face{font-family:'Graphik';font-style:italic;font-weight:normal;src:url(/assets/Graphik-RegularItalic-Web-616c5fe57b1d7ce02e6ba006b540c6006aa8e78a029c412b9c5e72dbbdac605d.woff2) format("woff2"),url(/assets/Graphik-RegularItalic-Web-898d5ffeeb14c436570f23194772d4e83784288743df796e37dfe192d8cdb27d.woff) format("woff");font-display:swap}@font-face{font-family:'Graphik';font-style:italic;font-weight:bold;src:url(/assets/Graphik-SemiboldItalic-Web-77b4ff47de35be660549e5b45d3a1c48cbf154392147b7931a13aaa0de899c7b.woff2) format("woff2"),url(/assets/Graphik-SemiboldItalic-Web-90b1ac8cca07597da9b25b37370f3582ca5ddfc9e4feaef8ff609b22e5290c01.woff) format("woff");
+	font-display:swap
+}
