@@ -24,7 +24,6 @@ class order_open {
 		$return .= '<div class="OrderOpenCont '.$status_class.'">';
 		
 		$return.= $this->OrderViewHead($order, $status_class);
-;
 		$return.= $this->OrderViewBody($order);
 		$return.= '</div>';
 		return $return;
@@ -36,8 +35,8 @@ class order_open {
 		if ($order[ApplicationSFBR] == 1) $summ_text = '<div class="form-group1"><input type="number" placeholder="Сумма" class="form-control"  id="order-input-summ"></div>';
 		else $summ_text = '';
 
-		//$ApiGet = new api_get('GetChatRA', 'ApplicationID='.$order['ApplicationID'].'&key='.$_SESSION['login_token']['Key']);
-		//$GetAnswersItems = $ApiGet->DataResults();
+		$OD = new order_data();
+		$status = $OD->OrderStatus($order);	
 
 		ob_start();
 		?>
@@ -90,6 +89,7 @@ class order_open {
 
 		<div class='OrderOpenClose' rel='<?=$_GET[page]?>'>+</div>
 		<div class="OrderHeader">заявка №<?=$order['ApplicationID']?> <b><?=$order['ApplicationCustomerName']?></b> (<?=$order['ApplicationCustomerCreatorName']?>, тел.:<?=$order['ApplicationCustomerPhone']?>)</div>
+		<?=$status?>
 		<?
 		return ob_get_clean();
 	}
@@ -104,7 +104,7 @@ class order_open {
 		$return.= $this->OrderViewBodyPers($order);
 		$return.= $this->OrderViewBodyOrder($order);
 		$return.= $this->OrderViewBodyAction($order);
-		$return.= $this->OrderViewBodyParams($order);
+		//$return.= $this->OrderViewBodyParams($order);
 
 		$return.= '</div>';
 		$return.= $this->OrderViewFooter($order);
@@ -113,33 +113,57 @@ class order_open {
 	}
 
 	function OrderViewBodyPers($order) {
+		$params = $this->OrderParams($order[inParams]);
 		ob_start();
 		?>
-		<div class="OrderSectionHead">пациент</div>
+		<div class="OrderSectionHead">клиент</div>
 		<div class="OrderSection OrderSectionPers">
 			<div class="OrderSectionInnerBlock">
 				<?=$order['ApplicationPerson']?>, <br>
 				<?=$order['ApplicationPersonBirthday']?> (<?=$order['ApplicationPersonAge']?> лет)
 			</div>
-			<div class="OrderSectionInnerBlock"><span class='OrderSectionParamTitle'>Полис:</span> <br><?=$order['ApplicationCardNo']?></div>
-			<div class="OrderSectionInnerBlock"><span class='OrderSectionParamTitle'>Позвонить:</span> <br><a href="tel:<?=$order['ApplicationMobileNo']?>"><?=$order['ApplicationMobileNo']?></a></div>
+			<div class="OrderSectionInnerBlock">
+				<span class='OrderSectionParamTitle'>Позвонить:</span> <br><a href="tel:<?=$order['ApplicationMobileNo']?>"><?=$order['ApplicationMobileNo']?></a>
+			</div>			
+			<div class="OrderSectionInnerBlock">
+				<span class='OrderSectionParamTitle'>Полис:</span> <br><?=$order['ApplicationCardNo']?>
+			</div>
+			<div class="OrderSectionInnerBlock">
+				<span class='OrderSectionParamTitle'>Параметры:</span> <ul><?=$params?></ul>
+			</div>
+
 		</div>
 		<?
 		return ob_get_clean();
 	}
 
 	function OrderViewBodyOrder($order) {
+		
+		$OI = new order_intervals();
+		$intervals = $OI->IntervalSet($order);
+		//$aproved_date =  $OI->AprovedDate($order);
+		//$aplication_menu = $OI->AplicationMenu($order);
+
+		$OM = new order_menu();
+		$aplication_menu = $OM->Buttons($order);	
+
+
 		ob_start();
 		?>
-		<div class="OrderSectionHead">заявка</div>
-		<div class="OrderSection hide">
+		<div class="OrderSectionHead" id="AplicationSection"><?=$aplication_menu?>заявка</div>
+		<div class="OrderSection">
 			<div class="OrderSectionInnerBlock">
-				<div class="OrderSectionParamTitle">Место оказания услуги:</div>
+				<div class="OrderSectionParamTitle">Задача по заявке:</div>
+				<div class="OrderSectionParam"><?=$order['ApplicationNotes']?></div>
+			</div>			
+			<div class="OrderSectionInnerBlock">
+				<div class="OrderSectionParamTitle">Описание:</div>
 				<div class="OrderSectionParam"><?=$order['ApplicationLocation']?>, <?=$order['ApplicationAdress']?></div>
 			</div>
 			<div class="OrderSectionInnerBlock">
-				<div class="OrderSectionParamTitle">Описание заявки:</div>
-				<div class="OrderSectionParam"><?=$order['ApplicationNotes']?></div>
+				<?=$intervals?>
+				
+
 			</div>
 
 		</div>
@@ -184,7 +208,7 @@ class order_open {
 		return $tt;
 	}
 
-	function OrderViewBodyParams($order) {
+/*	function OrderViewBodyParams($order) {
 
 		$params = $this->OrderParams($order[inParams]);
 		$return = '<div class="OrderSectionHead">параметры</div>';
@@ -192,7 +216,7 @@ class order_open {
 		$return.= $params;
 		$return.= '</div>';
 		return $return;
-	}
+	}*/
 
 	function OrderParams($inParams)
 	{
@@ -202,7 +226,7 @@ class order_open {
 
 			$param = $IP->Param($key);
 	
-			$return .= "<div class='align-center'><span class='OrderSectionParamTitle'>$param:</span> $value</div>";
+			$return .= "<li><span class='OrderSectionParamTitle'>$param:</span> $value</li>";
 		}
 
 		return $return;

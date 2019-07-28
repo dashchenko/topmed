@@ -118,6 +118,7 @@ $(document).ready(function() {
 
 	$('body').on('click', '.CatchNewOrder', function(e) {
 
+		e.preventDefault();
 		var id = $(this).attr('rel');
 		var object = $(this);
 		$.confirm({
@@ -131,7 +132,7 @@ $(document).ready(function() {
 					keys: ['enter'],
 					action: function(){
 						
-						$.post('modules/ajax/catch_order.php', {order_id: id, order_act: 'GetOrder'}, function(back_data) {
+						$.post('/javascripts/ajax/catch_order.php', {order_id: id, order_act: 'GetOrder'}, function(back_data) {
 							if (back_data == 0) {
 								object.remove();
 							} else {
@@ -163,7 +164,7 @@ $(document).ready(function() {
 					keys: ['enter'],
 					action: function(){
 						
-						$.post('modules/ajax/catch_order.php', {order_id: id, order_act: 'BackOrder'}, function(back_data) {
+						$.post('javascripts/ajax/catch_order.php', {order_id: id, order_act: 'BackOrder'}, function(back_data) {
 							if (back_data == 0) {
 								//location.reload();
 								location.href = '110.html';
@@ -234,7 +235,7 @@ $(document).ready(function() {
 				setTimeout(function() {modalResize ();}, 600);
 			}
 		})
-		$.get('modules/ajax/get_api_data_prov.php?ad='+id+'&mode=pend', function(cContent){
+		$.get('javascripts/ajax/get_api_data_prov.php?ad='+id+'&mode=pend', function(cContent){
 			$('.modal_content').html(cContent);
 		});
 	});	
@@ -249,7 +250,7 @@ $(document).ready(function() {
 				setTimeout(function() {modalResize ();}, 600);
 			}
 		})
-		$.get('modules/ajax/get_api_data_prov.php?ad='+id+'&mode=show', function(cContent){
+		$.get('javascripts/ajax/get_api_data_prov.php?ad='+id+'&mode=show', function(cContent){
 			$('.modal_content').html(cContent);
 		});
 	});
@@ -276,7 +277,7 @@ $(document).ready(function() {
 				setTimeout(function() {modalResize ();}, 600);
 			}
 		})
-		$.get('modules/ajax/get_api_data.php?ad='+id, function(cContent){
+		$.get('javascripts/ajax/get_api_data.php?ad='+id, function(cContent){
 			$('.modal_content').html(cContent);
 		});
 	});	
@@ -301,7 +302,7 @@ $(document).ready(function() {
 		$('.CancelOrderBtn').hide();
 
 		var SSdata = 'Answer_ID='+id;
-		$.post('modules/ajax/send_answer_prov.php', SSdata, function(back_data) {
+		$.post('javascripts/ajax/send_answer_prov.php', SSdata, function(back_data) {
 			if (back_data == 0) {
 				$.alert({
 					title: 'Данные отправлены',
@@ -378,7 +379,7 @@ $(document).ready(function() {
 			$(this).text('обработка запроса');
 			$(this).prop('disabled', true);
 			var SSdata = 'ApplicationID='+ApplicationID+'&FeedBackID='+FeedBackID+'&RequestID='+RequestID+'&Answer='+Answer;
-			$.post('modules/ajax/send_answer2.php', SSdata, function(back_data) {
+			$.post('javascripts/ajax/send_answer2.php', SSdata, function(back_data) {
 				if (back_data == 0) {
 					$.alert({
 						title: 'Данные отправлены',
@@ -443,7 +444,7 @@ $(document).ready(function() {
 			$('.CancelOrderBtn').hide();
 
 
-			$.post('modules/ajax/order_exec_req2.php', SSdata, function(back_data) {
+			$.post('javascripts/ajax/order_exec_req2.php', SSdata, function(back_data) {
 				if (back_data == 0) {
 
 					$.alert({
@@ -526,7 +527,7 @@ $(document).ready(function() {
 				var page = '120';			
 			}
 
-			$.post('modules/ajax/order_exec.php', SSdata, function(back_data) {
+			$.post('javascripts/ajax/order_exec.php', SSdata, function(back_data) {
 				if (back_data == 0) {
 
 					$.alert({
@@ -624,7 +625,7 @@ $(document).ready(function() {
 
 	$('body').on('submit','#form111',function(e){ 
 		e.preventDefault();
-		$.post("modules/ajax/change_password.php", $(this).serialize(), function(back_data) {
+		$.post("javascripts/ajax/change_password.php", $(this).serialize(), function(back_data) {
 			$.alert({title: '',content: back_data, confirmButton: 'Ok'});
 			$('#form111')[0].reset();
 		});
@@ -632,7 +633,7 @@ $(document).ready(function() {
 
 	$('body').on('submit','#form-rmd-pwd',function(e){ 
 		e.preventDefault();
-		$.post("modules/ajax/remind_password.php", $(this).serialize(), function(back_data) {
+		$.post("javascripts/ajax/remind_password.php", $(this).serialize(), function(back_data) {
 			//$.alert({title: '',content: back_data, confirmButton: 'Ok'});
 			$('#rmd-pwd-answ').html(back_data);
 			$('#form-rmd-pwd')[0].reset();
@@ -641,7 +642,7 @@ $(document).ready(function() {
 
 	$('body').on('submit','#form112',function(e){ 
 		e.preventDefault();
-		$.post("modules/ajax/change_password2.php", $(this).serialize(), function(back_data) {
+		$.post("javascripts/ajax/change_password2.php", $(this).serialize(), function(back_data) {
 			$.alert({title: '',content: back_data, confirmButton: 'Ok'});
 			$('#form112')[0].reset();
 		});
@@ -651,9 +652,9 @@ $(document).ready(function() {
 	///////////////////////////////////////////////////////////////
 // Слайдер-аккордион в модальном окне
 
-	$('body').on('click','.OrderSectionHead',function(e){ 
+	/*$('body').on('click','.OrderSectionHead',function(e){ 
 		$(this).next().slideToggle("slow"); 
-    });
+    });*/
 
 
 
@@ -665,7 +666,7 @@ $(document).ready(function() {
 		if ($('#form-sent-status input[type="text"]').val() == '') {
 			return false;
 		} else {
-			$.post("modules/ajax/send_oper_status.php", $(this).serialize(), function(back_data) {
+			$.post("javascripts/ajax/send_oper_status.php", $(this).serialize(), function(back_data) {
 
 				$('#current-status').html(back_data);
 				$('#form-sent-status')[0].reset();
@@ -674,5 +675,122 @@ $(document).ready(function() {
 	});
 
 
+	$('.order-interval-time').each(function(key, value) {
+	    $this = $(this)
+	    var split = $this.html().split(":")
+	    if( split.length == 2 ){
+	        $this.html('<span class="order-interval-time-top">'+split[0]+'</span><span class="order-interval-time-bottom">'+split[1]+'</span>')
+	    }    
+	});
+
+	$('body').on('click','.durationMinMax', function(e){ 
+
+		if (!$('#OrderSetDate').hasClass("date-edited")) {
+			var dS = $('#OrderSetDate').attr("data-Time");
+			//$.alert(dS);
+			$('.durationMinMax').clockTimePicker();
+			$('.durationMinMax').clockTimePicker('value', dS);
+		}
+	});
+
+	//$('.durationMinMax').clockTimePicker();
+
+	$('body').on('click','.order-interval-inner', function(e){ 
+
+		$('#SetIntButtn').removeClass('IntAproved');
+		$('#OrderSetDate').show();
+		$('#warning-time').show();
+		$('#OrderSetDate').addClass('date-edited');
+
+		var dS = $(this).attr("data-minTime");
+		var dE = $(this).attr("data-maxTime");
+		var dD = $(this).attr("data-date");
+
+		$('.durationMinMax').clockTimePicker({
+			minimum:dS, 
+			maximum:dE,
+			hideUnselectableNumbers: true
+		});
+		$('.durationMinMax').clockTimePicker('value', dS);
+		$('#SelectedDay').text(dD);
+		//$('.durationMinMax').val(dS);
+	});
+
+	$('body').on('change paste keyup','.durationMinMax', function(e){ 
+		$('#SetIntButtn').removeClass('IntAproved');
+		$('#warning-time').show();
+	});
+
+	$('body').on('click','#SetIntButtn', function(e){ 	
+		e.preventDefault();
+
+		var dD = $('#SelectedDay').text();
+		var dT = $('.durationMinMax').val();
+		var AppID = $(this).attr("data-aplication-id");
+
+		$.post("javascripts/ajax/st.php", {setDate: dD, setTime: dT, order_id: AppID}, function(back_data) {
+
+			var json = $.parseJSON(back_data);
+			var callbackText;
+
+			if (json.error == 0) {
+
+				callbackText = json.answer;
+				$('#SetIntButtn').addClass('IntAproved');
+				$('#warning-time').hide();
+				$('#OrderSetDate').attr("data-stamp", json.stamp);
+				$('#OrderSetDate').attr("data-time", json.time);
+
+				//alert (json.stamp);
+
+			} else {
+				callbackText = "ошибка: " + json.answer;
+
+				if (json.done == 1) {
+					$('#SelectedDay').text(json.date);
+					$('.durationMinMax').val(json.time);
+					$('#warning-time').hide();
+					$('#SetIntButtn').addClass('IntAproved');
+					$('#OrderSetDate').attr("data-stamp", json.stamp);
+					$('#OrderSetDate').attr("data-time", json.time);
+				}
+			}
+
+			$.alert({title: '',content: callbackText, confirmButton: 'Ok'});
+
+		});
+	});
+
+	$('body').on('click','#AplicationMenuHamburger', function(){ 
+		$(this).next().slideToggle("400"); 	
+		$(this).toggleClass("activeMenu"); 	
+
+	});
+
+	//TimeDiffer();
+//setTimeout("TimeDiffer();", 1000);
+
+setInterval(function() {
+  TimeDiffer();
+}, 1000);
+
+function TimeDiffer () { 
+	var today = new Date();
+	var date1 =  $('#OrderSetDate').attr("data-stamp");
+
+	var diff = today-new Date(date1)
+	console.log(diff);
+
+	if (diff < 300000) {
+		unChangeTime();	
+	}
+	return true;
+}
+
+function unChangeTime() {
+
+	console.log('ок');
+}
 
 });
+

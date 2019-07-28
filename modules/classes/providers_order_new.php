@@ -57,7 +57,14 @@ class new_order {
 				$tttt .= "<div class='order-nfo-text'>Пациент, возраст: $line[inPersonAge].</div>";
 				$tttt .= "<div class='order-nfo-text'>Больничный: $line[inApplicationSicklist].</div>";
 				$tttt .= "<div class='order-nfo-text'>$line[inApplicationPlace]. </div>";
-				$tttt .="<div class='order-nfo-text'>$line[inApplicationDate] $line[inApplicationPartOfDay] ($line[inTimeFrom] - $line[inTimeTo])</div></div>";
+				//$tttt .="</div>";
+
+				$OI = new order_intervals();
+				$arr_params = $OI->Intervals($line[inApplicationParams][intervals]);
+
+				$tttt .="<div class='order-nfo-text'>$arr_params</div></div>";
+
+
 				$tttt .= "</div></div></div>";
 			}
 

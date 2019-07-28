@@ -29,19 +29,21 @@ class api_valid {
 }
 
 class api_post {
-	function __construct ($method, $post) {		
-		$data = $this->ApiConnect ($method, $post);
+	function __construct ($method, $post, $apimethod="POST") {		
+		$data = $this->ApiConnect ($method, $post, $apimethod);
 		$this->result = $data;
 		$TokenCheck = new TokenCheck ($data);
 	}
 
-	function ApiConnect ($method, $post) {		
+	function ApiConnect ($method, $post, $apimethod) {		
 		$url = API_URL.$method;
 		$ch = curl_init();
 		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
 		curl_setopt($ch, CURLOPT_URL,$url);
-		curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");  
-		curl_setopt($ch, CURLOPT_POST, true);
+		curl_setopt($ch, CURLOPT_CUSTOMREQUEST, $apimethod);  
+
+		if ($apimethod == "POST") curl_setopt($ch, CURLOPT_POST, true);
+		
 		curl_setopt($ch, CURLOPT_POSTFIELDS,  http_build_query($post));
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 		curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1); 

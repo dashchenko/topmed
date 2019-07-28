@@ -72,6 +72,7 @@ class page_construct {
 		<script type="text/javascript" src="javascripts/my.plug.js"></script>
 		<script type="text/javascript" src="javascripts/jquery-confirm.js"></script>
 		<script type="text/javascript" src="javascripts/loadingoverlay.js"></script>
+		<script type="text/javascript" src="javascripts/jquery-clock-timepicker.js"></script>
 
 		<script type="text/javascript" src="javascripts/myjq.js"></script>
 

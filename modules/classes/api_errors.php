@@ -4,6 +4,12 @@ class api_errors {
 	function check($error) {		
 		if ($error != '0') {
 			switch ($error) {
+				case '32':
+					return "Срок изменения даты истек";
+					break;
+				case '31':
+					return "Запрашиваемое время не соответствует доступным периодам";
+					break;
 				case '12':
 					return "Для работы с этой заявкой вам необходимо заключить договор с заказчиком";
 					break;
@@ -24,7 +30,7 @@ class api_errors {
 				return "Ошибка авторизации";
 				break;			
 				default:
-				return "Системная ошибка: $error";
+				return "Системная ошибка [$error]";
 				break;
 			}
 		} else {

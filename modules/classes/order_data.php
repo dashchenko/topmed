@@ -45,8 +45,7 @@ class order_data {
 	}
 
 
-
-	function InfoButtons($order) {
+	function OrderStatus($order) {
 
 		$id = $order[ApplicationID];
 
@@ -54,7 +53,15 @@ class order_data {
 
 		$return .= "<form id='form-sent-status' method='post'><input type='hidden' name='appid' value='$id'><input type='text' class='order-oper-status-input' name='operstat' placeholder='Оперативный статус'> <button class='btn-blue'>применить</button></form>";
 
-		return "<div class='order-oper-status'>$return</div><button class='button-back' rel='$id'>вернуть</button> <button class='button-exec btn-blue' rel='$id'>выполнить</button>";
+		return "<div class='order-oper-status'>$return</div>";
+
+	}
+
+	function InfoButtons($order) {
+
+		$id = $order[ApplicationID];
+
+		return "<button class='button-back' rel='$id'>вернуть</button> <button class='button-exec btn-blue' rel='$id'>выполнить</button>";
 	}
 
 

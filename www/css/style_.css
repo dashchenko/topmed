@@ -53,6 +53,7 @@
 .fontawesome-lock:before        {content: "\f023";}
 .fontawesome-circle-arrow-down:before  {content: "\f13a";}
 .fontawesome-check:before  {content: "\f00c";}
+.fontawesome-check-circle:before  {content: "\f058";}
 .fontawesome-close:before  {content: "\f00d";}
 .fontawesome-thumbs-down:before  {content: "\f088";}
 .fontawesome-thumbs-up:before  {content: "\f087";}
@@ -1110,7 +1111,7 @@ div#order_result_box2 table {    margin-bottom: -4px;}
 
 /*///////////////////////////////////////////////////////////////////*/
 
-ul.top_menu {margin: 0px;margin-bottom: 1.2em;padding: 0px;background: #fff;}
+ul.top_menu {margin: 0px;margin-bottom: 1.2em;padding: 0px;background: #fff;border-bottom: 1px solid #2196f3;}
 
 
 ul.top_menu li {
@@ -1450,6 +1451,8 @@ h3.h3-title-section {display: none;}
     position: fixed;
     width: 100%;
     white-space: nowrap;
+    z-index: 100;
+    
 }
 
 .main-container {
@@ -1516,16 +1519,17 @@ h3.h3-title-section {display: none;}
     text-align: center;
     background: rgba(83, 83, 83, 0.37);
     color: #ffffff;
-    cursor: pointer;
+    /*cursor: pointer;*/
     padding: 5px 0;
     margin-bottom: 1px;
+    position: relative;
 }
 
 .OrderSectionInnerBlock {
     text-align: left;
     display: inline-block;
     padding: 3px 7px;
-    max-width: 350px;
+    max-width: 380px;
     min-height: 100px;
     vertical-align: top;
 
@@ -1534,6 +1538,11 @@ h3.h3-title-section {display: none;}
     margin: 0 3px 3px 0;
 }
 
+@media screen and (max-width:768px){ 
+    .OrderSectionInnerBlock {
+        max-width: 100%;
+    }
+}
 
 .OrderSection, .OrderHeader {
     padding: 5px 10px;
@@ -1545,7 +1554,8 @@ h3.h3-title-section {display: none;}
 
 .OrderOpenClose {
     float: right;
-    font-size: 2em;
+    font-size: 2.5em;
+    font-family: serif;
     line-height: 0.6;
     color: #737373;
     padding: 4px;
@@ -1557,16 +1567,39 @@ h3.h3-title-section {display: none;}
         
 .OrderSectionParamTitle {
     font-size: 0.8em;
+    color: #777;
 }
 .align-center {
     text-align: center;
 }
 
+.status-class-1, .status-class-2, .status-class-0, .status-class-3, .status-class-4, .status-class-10 {
+    border: 0px;
+    border-left: 5px solid; border-right: 25px solid; position: relative;background-color: #fff
+}
 
-.status-class-1 {background-color: #fff}
-.status-class-2 {background-color: #fffac4;}
-.status-class-0, .status-class-3 {background-color: #bff0ff}
-.status-class-4 {background-color: #ececec; color: #9c9c9c;}
+.status-class-1 {border-color: #8d96a3}
+.status-class-10 {border-color: #0069ff;}
+.status-class-2 {border-color: #ff9134}
+.status-class-0, .status-class-3 {border-color: #f1592a}
+.status-class-4 {border-color: #2ecc71;}
+
+
+
+.status-class-1:before, .status-class-2:before, .status-class-3:before, .status-class-4:before, .status-class-0:before,  .status-class-10:before {
+    color: #ffffff;
+    position: absolute;
+    font-family: 'FontAwesome2', sans-serif;
+    top: 1px;
+    right: -19px;
+}
+ .status-class-1:before {content: "\f059";}
+ .status-class-2:before {content: "\f252";}
+ .status-class-3:before, .status-class-3:before {content: "\f06a";}
+ .status-class-4:before {content: "\f058";}
+ .status-class-10:before {content: "\f274";}
+
+
 
 
 .icon-pict{background-position: top;background-repeat: no-repeat;background-size: cover;   width: 50px; height: 50px;display: inline-block;}
@@ -1599,4 +1632,160 @@ h3.h3-title-section {display: none;}
     border-radius: 4px 4px 0 0;
     margin: 0 0 -18px 10px;
     vertical-align: top;
+}
+
+.order-interval-list div {
+    display: inline-block;    
+}
+
+.order-interval-newday {
+    background-color: #31a3bc;
+    /*background-color: #f15a29;*/
+    padding: 2px 10px;
+    color: #fff;
+    margin: 0 5px 5px 0;
+    vertical-align: middle;
+}
+
+.order-interval-time-top, .order-interval-time-bottom {
+    padding: 0 5px;  
+    line-height: 1;
+    font-size: 0.9rem;
+    
+}
+.order-interval-inner, .order-interval-time {
+    color: #333333;
+    vertical-align: middle;
+}
+
+.order-interval-inner {
+    border-right: 1px solid #fff;
+    border: 1px solid #fff;
+    margin-left: 3px;
+    border-radius: 2px;
+    font-size: 1.0rem;
+    line-height: 0;
+    cursor: pointer;
+}
+
+.order-interval-inner:hover, .order-interval-inner:active  {
+    background-color: #45b9d3;
+}
+
+.order-interval-time-bottom {
+    border-top: 1px solid #333333;
+    display: block;
+}
+
+.font-blue {
+    color:#2196f3 !important;
+}
+
+input.time.durationMinMax {
+    background: none;
+    border: none;
+    border-bottom: 1px solid;
+    cursor: pointer;
+    min-width: 45px !important;
+    width: 45px;
+}
+
+.OrderSectionInnerBlock ul {
+    line-height: 1.2;
+    list-style-type: none;
+}
+
+#OrderSetDate {
+    padding-top: 1em;
+    font-size: 1.1em;
+}
+
+span#SelectedDay {
+    padding-right: .5em;
+}
+
+#SetIntButtn:after {
+    content: "\f058";
+    font-family: 'FontAwesome2';
+    z-index: 10;
+    cursor: pointer;
+    line-height: 1.7;
+    padding-left: 10px;
+    text-decoration: none;
+}
+
+#SetIntButtn {
+    text-decoration: none;
+    color: #ccc;
+    font-size: 1.2em;
+}
+
+#SetIntButtn:hover, #SetIntButtn:active, #SetIntButtn.IntAproved:hover, #SetIntButtn.IntAproved:active {
+    color: #3498db;
+}
+
+#SetIntButtn.IntAproved {
+    color: #7bc6f9;
+}
+
+#warning-time {
+    color: red;
+    font-size: .7em;
+    position: absolute;
+    margin-top: 6px;
+}
+
+#AplicationSection {
+    position: 
+}
+
+#AplicationMenuHamburger {
+    position: absolute;
+    padding: 0 .4em;
+    font-size: 1.3em;
+    z-index: 10000;
+    cursor: pointer;
+}
+
+#AplicationMenuHamburger.activeMenu {
+    color: #464646;
+}
+
+.AplicationSectionMenu {
+    position: absolute;
+    color: #6d6d6d;
+    z-index: 10;
+    background: #d0d0d0;
+    padding-bottom: .5em;
+    border: 1px solid #c0c0c0;
+    top: 2.4em;
+    max-width: 60%;
+    text-align: left;
+}
+
+.AplicationSectionMenu ul {
+    font-size: 1em;
+    list-style-type: none;
+    padding: 0px;
+    margin: 2px;
+}
+
+li {
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+}
+.AplicationSectionMenu ul li {
+    font-size: 1em;
+    padding: 5px 20px 0px 30px;
+    width: 100%;
+    cursor: pointer;
+}
+
+.AplicationSectionMenu ul li:active, .AplicationSectionMenu ul li:hover {
+    background-color: #e0e0e0;
+    -moz-box-shadow: 1px 12px 7px -9px #9999994a;
+    -webkit-box-shadow: 1px 12px 7px -9px #9999994a;
+    box-shadow: 1px 12px 7px -9px #9999994a;
 }

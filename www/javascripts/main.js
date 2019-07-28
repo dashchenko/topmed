@@ -52,10 +52,12 @@ $(function() {
     if($(window).scrollTop() >= pos.top) {
       // $('#top').after(newTop);
       $('#top').css({'position':'fixed', 'background-color':'rgba(255,255,255,0.9)'});
+      $('.mobile-nav-button').css({'position':'fixed'});
   }
     if(($(window).scrollTop() < pos.top)) {
       // $('#new-top').remove();
       $('#top').css({'position':'absolute', 'background-color':'rgba(255,255,255)'});
+      $('.mobile-nav-button').css({'position':'absolute'});
     }
 });
 
